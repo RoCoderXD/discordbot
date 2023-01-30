@@ -1,6 +1,6 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioPlayer, NoSubscriberBehavior, createAudioResource } = require("@discordjs/voice");
 const { ConnectionService } = require("discord.js");
-const testaudio = createAudioResource("./Xi Ping.mp3");
+const testaudio = createAudioResource("./songs/Xi Ping.mp3");
 const player = createAudioPlayer({
     behaviors: {
         nosubscriber: NoSubscriberBehavior.Pause,
@@ -28,7 +28,6 @@ module.exports = {
         const subscription = getVoiceConnection(guildId);
         if (subscription) {
                 player.stop();
-                getVoiceConnection(guildId).destroy();
         }
     },
     pauseaudio: function PauseAudio(guildId){

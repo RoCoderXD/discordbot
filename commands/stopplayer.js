@@ -10,7 +10,6 @@ module.exports = {
             //.setDescription('the url'))
     async execute(interaction) {
         await interaction.reply('Stopping');
-        await connectvc(interaction);
-        playaudio(interaction.guildId);
+        stopaudio(interaction.guildId);
     }
 };
