@@ -8,7 +8,10 @@ const player = createAudioPlayer({
 });
 module.exports = {
     connectvc: async function ConnectToVC(interaction){
+        // Get the command invoker's vc channel.
         const vc = interaction.member.voice.channel;
+
+        // Create the test audio resource to be played
         testaudio = createAudioResource("./songs/Xi Ping.mp3");
 
         if (!vc){
@@ -19,6 +22,7 @@ module.exports = {
             guildId: interaction.guildId,
             adapterCreator: vc.guild.voiceAdapterCreator,
         });
+        console.log(`Connected to vc ${interaction.member.voice.channelId} in guild ${interaction.guildId}!`);
     },
     playaudio: function PlayAudio(guildId){
         player.play(testaudio);
@@ -43,12 +47,13 @@ module.exports = {
                 player.unpause();
         }
     },
-    leave: function Leave(guildId){
-        const subscription = getVoiceConnection(guildId);
+    leave: function Leave(interaction){
+        const subscription = getVoiceConnection(interaction.guildId);
         if (subscription) {
             player.stop();
             
-            getVoiceConnection(guildId).destroy();
+            getVoiceConnection(interaction.guildId).destroy();
+            console.log(`Disconnected from vc ${interaction.member.voice.channelId} in guild ${interaction.guildId}!`);
         }
     },
 

@@ -10,7 +10,7 @@ module.exports = {
             //.setDescription('the url'))
     async execute(interaction) {
         await interaction.reply('Left!');
-        await leave(interaction.guildId);
+        await leave(interaction);
 
     }
 };
