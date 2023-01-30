@@ -6,11 +6,10 @@ const player = createAudioPlayer({
         nosubscriber: NoSubscriberBehavior.Pause,
     },
 });
-
 module.exports = {
     connectvc: async function ConnectToVC(interaction){
         const vc = interaction.member.voice.channel;
-
+        
         if (!vc){
             return msg.reply("You need to be in a voice channel!");
         }
@@ -40,11 +39,24 @@ module.exports = {
                 getVoiceConnection(guildId).destroy();
         }
     },
+    pauseaudio: function PauseAudio(guildId){
+        const subscription = getVoiceConnection(guildId);
+        if (subscription) {
+                player.pause();
+        }
+    },
+    unpauseaudio: function UnpauseAudio(guildId){
+        const subscription = getVoiceConnection(guildId);
+        if (subscription) {
+                player.unpause();
+        }
+    },
     leave: function Leave(guildId){
         const subscription = getVoiceConnection(guildId);
         if (subscription) {
-                player.stop();
-                getVoiceConnection(guildId).destroy();
+            player.stop();
+            
+            getVoiceConnection(guildId).destroy();
         }
     },
 
