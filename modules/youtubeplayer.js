@@ -12,7 +12,7 @@ module.exports = {
         const vc = interaction.member.voice.channel;
 
         // Create the test audio resource to be played
-        testaudio = createAudioResource("./songs/Xi Ping.mp3");
+        testaudio = createAudioResource("../songs/Xi Ping.mp3");
 
         if (!vc){
             return msg.reply("You need to be in a voice channel!");
