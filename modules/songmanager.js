@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const { exec } = require("child_process");
+const songs = require("../downloadedsongs.json");
 
 module.exports = {
     downloadyt: function DownloadYT(url){
@@ -14,5 +15,14 @@ module.exports = {
             }
             console.log("Downloading...");
         });
+    },
+    checkforsong: function CheckForSong(url){
+        const AllSongs = JSON.parse(songs);
+        for(var key in AllSongs["songnames"]){
+            if(obj.hasOwnProperty(key) && key == url){
+                var value = AllSongs["songnames"][key];
+                return [key,value];
+            }
+        }
     }
 }
