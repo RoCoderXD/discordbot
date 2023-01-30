@@ -6,7 +6,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 // Create the client object.
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 
 
@@ -32,7 +32,7 @@ client.on('guildCreate', async (guild) => {
 
             // The put method is used to fully refresh all commands in the guild with the current set
             const data = await rest.put(
-                Routes.applicationGuildCommands(clientId, guild.id),
+                Routes.applicationGuildCommands(clientId, guild.id),//guild.id
                 { body: commands },
             );
 
