@@ -1,12 +1,12 @@
 const { Client, Events, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
-const { token, clientId } = require('./config.json');
+const { token, clientId, guildId } = require('./config.json');
 
 
 const fs = require("node:fs");
 const path = require("node:path");
 
 // Create the client object.
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 
 
@@ -14,10 +14,10 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on('guildCreate', async (guild) => {
     const commands = [];
     // Grab all the command files from the commands directory you created earlier
-    const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+    const commandFiless = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
     // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
-    for (const file of commandFiles) {
+    for (const file of commandFiless) {
         const command = require(`./commands/${file}`);
         commands.push(command.data.toJSON());
     }
@@ -32,7 +32,7 @@ client.on('guildCreate', async (guild) => {
 
             // The put method is used to fully refresh all commands in the guild with the current set
             const data = await rest.put(
-                Routes.applicationGuildCommands(clientId, guild.id),
+                Routes.applicationGuildCommands(clientId, guild.id),//guild.id
                 { body: commands },
             );
 
