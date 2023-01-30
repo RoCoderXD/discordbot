@@ -23,14 +23,6 @@ module.exports = {
         player.play(testaudio);
         const subscription = getVoiceConnection(guildId).subscribe(player);
 
-        if (subscription) {
-            setTimeout(() => function(){
-                player.stop();
-                subscription.unsubscribe();
-                getVoiceConnection(guildId).destroy();
-            
-            },5000);
-        }
     },
     stopaudio: function StopAudio(guildId){
         const subscription = getVoiceConnection(guildId);
