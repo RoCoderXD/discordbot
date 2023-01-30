@@ -1,6 +1,6 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioPlayer, NoSubscriberBehavior, createAudioResource } = require("@discordjs/voice");
 const { ConnectionService } = require("discord.js");
-const testaudio = createAudioResource("./songs/Xi Ping.mp3");
+var testaudio;
 const player = createAudioPlayer({
     behaviors: {
         nosubscriber: NoSubscriberBehavior.Pause,
@@ -9,7 +9,8 @@ const player = createAudioPlayer({
 module.exports = {
     connectvc: async function ConnectToVC(interaction){
         const vc = interaction.member.voice.channel;
-        
+        testaudio = createAudioResource("./songs/Xi Ping.mp3");
+
         if (!vc){
             return msg.reply("You need to be in a voice channel!");
         }
