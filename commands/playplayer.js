@@ -1,16 +1,17 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { connectvc, playaudio } = require('../youtubeplayer.js');
+const { playaudio } = require('../modules/youtubeplayer.js');
+
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('playtest')
-    .setDescription('play the test audio'),
-    //.addStringOption(option =>
-        //option.setName('query')
-            //.setDescription('the url'))
+    .setName('play')
+    .setDescription('Play url')
+    .addStringOption(option =>
+        option.setName('url')
+            .setDescription('the url')
+            .setRequired(true)),
     async execute(interaction) {
-        await interaction.reply('Playing test audio!');
-        await connectvc(interaction);
-        playaudio(interaction.guildId);
+        playaudio(interaction);
+        await interaction.reply("Playing!");
     }
 };

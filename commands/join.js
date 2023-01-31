@@ -1,15 +1,15 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { stopaudio } = require('../modules/youtubeplayer.js');
+const { connectvc } = require('../modules/youtubeplayer.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('stopplayer')
-    .setDescription('stop playback'),
+    .setName('join')
+    .setDescription('Join the channel'),
     //.addStringOption(option =>
         //option.setName('query')
             //.setDescription('the url'))
     async execute(interaction) {
-        await interaction.reply('Stopping');
-        stopaudio(interaction.guildId);
+        connectvc(interaction);
+        await interaction.reply('Joined!');
     }
 };

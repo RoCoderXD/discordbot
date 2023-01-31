@@ -1,15 +1,18 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { stopaudio } = require('../modules/youtubeplayer.js');
+
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('stopplayer')
-    .setDescription('stop playback'),
+    .setName('addsong')
+    .setDescription('Add a song to the queue.'),
     //.addStringOption(option =>
         //option.setName('query')
             //.setDescription('the url'))
     async execute(interaction) {
-        await interaction.reply('Stopping');
-        stopaudio(interaction.guildId);
+        let dl = downloadyt(interaction);
+        if(dl == false){
+            
+        }
+        await interaction.reply('Added song!');
     }
 };

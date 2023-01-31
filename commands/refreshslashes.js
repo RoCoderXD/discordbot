@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const { SlashCommandBuilder } = require('discord.js');
-const { refreshslashes } = require("../commandhandler")
+const { refreshslashes } = require("../modules/commandhandler")
 
 module.exports = {
     data: new SlashCommandBuilder()
