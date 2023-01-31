@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { downloadyt } = require('../modules/songmanager.js');
+
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,7 +9,10 @@ module.exports = {
         //option.setName('query')
             //.setDescription('the url'))
     async execute(interaction) {
-        downloadyt(interaction);
+        let dl = downloadyt(interaction);
+        if(dl == false){
+            
+        }
         await interaction.reply('Added song!');
     }
 };

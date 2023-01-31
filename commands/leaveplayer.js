@@ -1,9 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
-const { leave } = require('../youtubeplayer.js');
+const { leave } = require('../modules/youtubeplayer.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('leaveplayer')
+    .setName('leave')
     .setDescription('Leave the channel'),
     //.addStringOption(option =>
         //option.setName('query')

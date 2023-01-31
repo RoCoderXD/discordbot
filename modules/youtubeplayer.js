@@ -1,6 +1,8 @@
-const { joinVoiceChannel, getVoiceConnection, createAudioPlayer, NoSubscriberBehavior, createAudioResource } = require("@discordjs/voice");
+const { joinVoiceChannel, getVoiceConnection, createAudioPlayer, NoSubscriberBehavior, createAudioResource, StreamType, demuxProbe, AudioPlayerStatus, VoiceConnectionStatus } = require("@discordjs/voice");
 const { ConnectionService } = require("discord.js");
-var testaudio;
+const play = require("play-dl");
+
+var song;
 const player = createAudioPlayer({
     behaviors: {
         nosubscriber: NoSubscriberBehavior.Pause,
@@ -10,9 +12,6 @@ module.exports = {
     connectvc: async function ConnectToVC(interaction){
         // Get the command invoker's vc channel.
         const vc = interaction.member.voice.channel;
-
-        // Create the test audio resource to be played
-        testaudio = createAudioResource("../songs/Xi Ping.mp3");
 
         if (!vc){
             return msg.reply("You need to be in a voice channel!");
@@ -24,10 +23,22 @@ module.exports = {
         });
         console.log(`Connected to vc ${interaction.member.voice.channelId} in guild ${interaction.guildId}!`);
     },
-    playaudio: function PlayAudio(guildId){
-        player.play(testaudio);
-        const subscription = getVoiceConnection(guildId).subscribe(player);
+    playaudio: async function PlayAudio(interaction){
+        let args = interaction.options.getString('url')
 
+        let stream = await play.stream(args)
+        const vc = interaction.member.voice.channel;
+        if (!vc){
+            return msg.reply("You need to be in a voice channel!");
+        }
+
+        song = createAudioResource(stream.stream, {
+            inputType: stream.type,
+            inlineVolume: true
+        });
+        song.volume.setVolume(0.7);
+        player.play(song);
+        const subscription = getVoiceConnection(interaction.guildId).subscribe(player);
     },
     stopaudio: function StopAudio(guildId){
         const subscription = getVoiceConnection(guildId);

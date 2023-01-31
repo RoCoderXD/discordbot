@@ -2,20 +2,20 @@
 
 
 const fs = require("node:fs");
+const path = require("node:path");
 const { REST, Routes } = require('discord.js');
 const { token, clientId } = require('../config.json');
-const { downloadyt } = require("./downloadsong");
 
 module.exports = {
     refreshslashes: function RefreshSlashes(guildId){
 
         const commands = [];
         // Grab all the command files from the commands directory you created earlier
-        const commandFiles = fs.readdirSync('../commands/').filter(file => file.endsWith('.js'));
+        const commandFiles = fs.readdirSync('/root/VSCdirs/discordbot/commands/').filter(file => file.endsWith('.js'));
         
         // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
         for (const file of commandFiles) {
-            const command = require(`../commands/${file}`);
+            const command = require(`/root/VSCdirs/discordbot/commands/${file}`);
             commands.push(command.data.toJSON());
         }
         
@@ -40,8 +40,5 @@ module.exports = {
             }
         })();
     },
-    downloadyt: function DownloadYT(interaction){
-
-    }
 
 }
