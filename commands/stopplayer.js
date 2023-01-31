@@ -3,8 +3,8 @@ const { stopaudio } = require('../modules/youtubeplayer.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('stopplayer')
-    .setDescription('stop playback'),
+    .setName('stop')
+    .setDescription('Stop current song.'),
     //.addStringOption(option =>
         //option.setName('query')
             //.setDescription('the url'))
