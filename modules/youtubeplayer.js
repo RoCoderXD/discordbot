@@ -8,6 +8,15 @@ const player = createAudioPlayer({
         nosubscriber: NoSubscriberBehavior.Pause,
     },
 });
+
+// A dict of dicts for saving queues. The keys of the first dict is the GuildId, within the keys are the urls and the values is the name of the song.
+// The GuildId dict should be deleted upon the end of the queue to prevent the waste of memory, obviously.
+var queues = {
+
+};
+
+
+
 module.exports = {
     connectvc: async function ConnectToVC(interaction){
         // Get the command invoker's vc channel.
@@ -24,21 +33,35 @@ module.exports = {
         console.log(`Connected to vc ${interaction.member.voice.channelId} in guild ${interaction.guildId}!`);
     },
     playaudio: async function PlayAudio(interaction){
-        let args = interaction.options.getString('url')
+        let args = interaction.options.getString('url');
 
         let stream = await play.stream(args)
         const vc = interaction.member.voice.channel;
         if (!vc){
-            return msg.reply("You need to be in a voice channel!");
+            return false;
         }
 
         song = createAudioResource(stream.stream, {
             inputType: stream.type,
             inlineVolume: true
         });
-        song.volume.setVolume(0.7);
+        song.volume.setVolume(0.5);
         player.play(song);
         const subscription = getVoiceConnection(interaction.guildId).subscribe(player);
+    },
+    playqueue: function PlayQueue(interaction){
+        if(queues[interaction.guildId].keys().length > 0){
+
+        }else{
+            return false;
+        }
+    },
+    addqueue: function AddQueue(interaction){
+        let args = interaction.options.getString('url');
+        if(!queues[interaction.guildId]){
+            queues[interaction.guildId] = {};
+        }
+
     },
     stopaudio: function StopAudio(guildId){
         const subscription = getVoiceConnection(guildId);

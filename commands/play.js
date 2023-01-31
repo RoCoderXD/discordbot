@@ -11,7 +11,12 @@ module.exports = {
             .setDescription('the url')
             .setRequired(true)),
     async execute(interaction) {
-        playaudio(interaction);
+        let status = playaudio(interaction);
+
+        if(status == false){
+            await interaction.reply("You need to be in a vc!");
+            return;
+        }
         await interaction.reply("Playing!");
     }
-};
+};  

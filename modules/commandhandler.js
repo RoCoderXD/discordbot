@@ -1,4 +1,4 @@
-// Looking for the youtube player controls (not including downloading)? Go to youtubeplayer.js!
+// Looking for the youtube player controls? Go to youtubeplayer.js!
 
 
 const fs = require("node:fs");
