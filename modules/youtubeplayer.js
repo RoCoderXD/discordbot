@@ -48,6 +48,8 @@ module.exports = {
         song.volume.setVolume(0.5);
         player.play(song);
         const subscription = getVoiceConnection(interaction.guildId).subscribe(player);
+        //let info = await play.video_info(args);
+        //return info.video_details.title;
     },
     playqueue: function PlayQueue(interaction){
         if(queues[interaction.guildId].keys().length > 0){

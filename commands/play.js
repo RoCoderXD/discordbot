@@ -17,6 +17,6 @@ module.exports = {
             await interaction.reply("You need to be in a vc!");
             return;
         }
-        await interaction.reply("Playing!");
+        await interaction.reply('Playing!');
     }
 };  

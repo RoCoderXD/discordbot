@@ -9,6 +9,16 @@ const path = require("node:path");
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
 
 
+module.exports = {
+    getprofile: function GetProfile(interaction){
+        //const member = interaction.guild.members.fetch(interaction.options.getString('userid'));
+        const user = client.users.cache.find(u => u.tag === interaction.options.getString('userid'))
+        if(!user) return false;
+        return user.id;
+    }
+}
+
+
 
 // Detect new server and deploy commands
 client.on('guildCreate', async (guild) => {
