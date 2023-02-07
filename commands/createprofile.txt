@@ -1,0 +1,18 @@
+const { SlashCommandBuilder } = require('discord.js');
+const { createprofile } = require('../modules/profilehandler.js');
+
+module.exports = {
+    data: new SlashCommandBuilder()
+    .setName('createprofile')
+    .setDescription('Makes your profile for leveling and leaderboards.'),
+    async execute(interaction) {
+        let status = await createprofile(interaction);
+        console.log(status);
+        if(status == false){
+            await interaction.reply("Profile already created!");
+            return;
+        }else if(status == true){
+            await interaction.reply('Created profile!');
+        }
+    }
+};

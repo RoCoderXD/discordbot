@@ -1,23 +1,20 @@
 const { Client, Events, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
 const { token, clientId } = require('./config.json');
+const { createprofile, newmessage } = require("./modules/profilehandler.js");
 
 
 const fs = require("node:fs");
 const path = require("node:path");
 
 // Create the client object.
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
 
+// Manage exp and rp
+client.on('messageCreate', async (message) => {
+    console.log("hiii");
+    await createprofile(message);
 
-module.exports = {
-    getprofile: function GetProfile(interaction){
-        //const member = interaction.guild.members.fetch(interaction.options.getString('userid'));
-        const user = client.users.cache.find(u => u.tag === interaction.options.getString('userid'))
-        if(!user) return false;
-        return user.id;
-    }
-}
-
+});
 
 
 // Detect new server and deploy commands
@@ -92,6 +89,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+
 
 
 client.once(Events.ClientReady, c => {
