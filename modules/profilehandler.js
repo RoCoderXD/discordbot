@@ -43,7 +43,7 @@ module.exports = {
     newmessage: async function NewMessage(interaction){
         
         const rpAdd = 0;
-        await db.run(`UPDATE users SET exp = exp + 100, rp = rp + ${rpAdd}`);
+        await db.run(`UPDATE users SET exp = exp + 100, rp = rp + ${rpAdd} WHERE id == ${interaction.user.id}`);
     }
 
 }
