@@ -7,13 +7,12 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 // Create the client object.
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 // Manage exp and rp
 client.on('messageCreate', async (message) => {
-    console.log("hiii");
-    await createprofile(message);
-
+    createprofile(message);
+    setTimeout(function(){newmessage(message);}, 1000);
 });
 
 
