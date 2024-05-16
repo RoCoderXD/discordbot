@@ -1,3 +1,3 @@
 # discordbot
 
-I've decided to have all future versions of this bot be private for my own use. You are free to use this code in your own projects if you wish (DON'T USE THE DEV BRANCH'S CODE).
+Alright, I decided to completely wipe this and keep it exclusively for my personal use. Once upon a time, there was some pretty good (messy but good) work that was here.
